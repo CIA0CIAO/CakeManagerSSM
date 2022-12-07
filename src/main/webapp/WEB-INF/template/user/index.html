@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<![endif]-->
+<!-- Begin Head -->
+
+<head>
+    <title>罗莎蛋糕 - 订单</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="MobileOptimized" content="320">
+
+    <!--Start Style -->
+    <link rel="icon" type="image/x-icon" th:href="@{/static/picture/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/fonts.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/icofont.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+</head>
+
+<body>
+<div class="loader">
+    <div class="spinner">
+        <img th:src="@{/static/picture/Bika_loading.gif}" alt="">
+    </div>
+</div>
+<!-- Main Body -->
+<div class="page-wrapper">
+    <div th:replace="template.html::title"></div>
+    <div th:replace="template.html::aside"></div>
+    <!-- Container Start -->
+    <div class="page-wrapper">
+        <div class="main-content">
+            <!-- Page Title Start -->
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-title-wrapper">
+                        <div class="page-title-box ad-title-box-use">
+                            <h4 class="page-title"><b>订单管理</b></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Table Start -->
+            <div class="row">
+                <!-- Styled Table Card-->
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card table-card">
+                        <div class="card-header pb-0">
+                            <h6>以下是您完成付款的订单，若有疑问请联系管理员。</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-holder">
+                                <div class="table-responsive">
+                                    <table class="table table-styled mb-0">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>订单编号</th>
+                                            <th>购买数量</th>
+                                            <th>支付金额</th>
+                                            <th>完成时间</th>
+                                            <th>删除记录</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="order : ${order_list}">
+                                            <td th:text="'#'+${order.getOrder_id()}">1</td>
+                                            <td th:text="${order.getOrder_number()}+'件'">购买数量</td>
+                                            <td th:text="'¥'+${order.getTotal()}">支付金额</td>
+                                            <td th:text="${order.getTime()}">完成时间</td>
+                                            <td class="relative">
+                                                <a  th:href="@{/api/user/deleteorder(order_id=${order.getOrder_id()})}">
+                                                    <button type="button" class="effect-btn btn btn-danger squer-btn sm-btn">
+                                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ad-footer-btm">
+                <p>Copyright © 2022.Company name All rights reserved.<a target="_blank" href="#">ciaociao</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script Start -->
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/popper.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/swiper.min.js}"></script>
+<!-- Page Specific -->
+<script th:src="@{/static/js/nice-select.min.js}"></script>
+<!-- Custom Script -->
+<script th:src="@{/static/js/custom.js}"></script>
+</body>
+
+</html>

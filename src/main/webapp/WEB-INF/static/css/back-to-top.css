@@ -1,0 +1,76 @@
+.back-to-top {
+    background-image: url("../picture/rocket_top.png");
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    text-align: center;
+    width: 150px;
+    height: 175px;
+    border-radius: 50%;
+     display: none;
+    z-index:4;
+}
+.back-to-top:hover {
+    animation: fly 0.4s steps(1) infinite;
+    background-image: url("../picture/rocket_frame.png");
+}
+@keyframes fly {
+    0% {
+        background-position-x: 0;
+    }
+    25% {
+        background-position-x: -150px;
+    }
+    50% {
+        background-position-x: -300px;
+    }
+    75% {
+        background-position-x: -450px;
+    }
+    to {
+        background-position-x: -600px;
+    }
+}
+.people-22 {
+    position: absolute;
+    width: 7rem;
+    bottom: 0.8rem;
+    left: 0;
+    z-index:1;
+}
+.people-33 {
+    position: absolute;
+    width: 6rem;
+    right: 0;
+    top: 0;
+}
+.people-022 {
+    position: absolute;
+    width: 7rem;
+    bottom: 0rem;
+    left: 0;
+    z-index:1;
+}
+.people-033 {
+    position: absolute;
+    width: 7rem;
+    bottom: 0rem;
+    right: 0;
+    z-index:1;
+}
+#jumbotron1{
+    height: 338px;
+    max-width: 100%;
+    line-height: normal;
+    font-weight:bolder;
+    background:url("../picture/004.png");
+    background-size: 100%;
+}
+#jumbotron2{
+    height: 338px;
+    max-width: 100%;
+    line-height: normal;
+    font-weight:bolder;
+    background:url("../picture/shasha.png");
+    background-size: 100%;
+}

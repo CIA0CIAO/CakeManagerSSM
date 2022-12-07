@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<![endif]-->
+<!-- Begin Head -->
+
+<head>
+    <title>罗莎蛋糕后台 - 用户</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="MobileOptimized" content="320">
+    <!--Start Style -->
+    <link rel="icon" type="image/x-icon" th:href="@{/static/picture/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/fonts.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/icofont.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+	<link rel="stylesheet" id="theme-change" type="text/css" href="">
+</head>
+
+<body>
+	<div class="loader">
+	  <div class="spinner">
+		<img th:src="@{/static/picture/Bika_loading.gif}" alt="">
+	  </div> 
+	</div>
+    <!-- Main Body -->
+    <div class="page-wrapper">
+        <!-- Header Start -->
+        <div th:replace="template.html"::title></div>
+        <!-- Sidebar Start -->
+        <div th:replace="template.html"::asid></div>
+        <!-- Container Start -->
+        <div class="page-wrapper">
+            <div class="main-content">
+                <!-- Page Title Start -->
+                <div class="row">
+                    <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-box ad-title-box-use">
+                                <h4 class="page-title"><b>用户列表</b></h4>
+                            </div>
+                            <div class="ad-breadcrumb">
+                                <ul>
+                                    <li>
+                                        <div class="ad-user-btn">
+                                            <input class="form-control" type="text" placeholder="输入用户编号..." id="text-input">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.966 56.966">
+                                                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+												s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+												c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+												s-17-7.626-17-17S14.61,6,23.984,6z"></path>
+                                            </svg>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="add-group">
+                                            <button class="btn btn-primary squer-btn" href="add-book">搜索</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Table Start -->
+                <div class="row">
+                    <!-- Styled Table Card-->
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card table-card">
+                            <div class="card-header pb-0">
+                                <h4><b>数据展示</b></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-holder">
+                                    <div class="table-responsive">
+                                        <table class="table table-styled mb-0">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th>用户名称</th>
+                                                <th>用户资金</th>
+                                                <th>收件人</th>
+                                                <th>电话号码</th>
+                                                <th>收件地址</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="list:${user_list}">
+                                                    <td th:text="${list.getName()}"></td>
+                                                    <td th:text="'¥'+${list.getMoney()}"></td>
+                                                    <td th:text="${list.getRealname()}"></td>
+                                                    <td th:text="${list.getPhone()}"></td>
+                                                    <td th:text="${list.getAddress()}"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Color Setting -->
+    <!-- Color Setting -->
+
+
+    <!-- Script Start -->
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script th:src="@{/static/js/popper.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/swiper.min.js}"></script>
+    <!-- Page Specific -->
+    <script th:src="@{/static/js/nice-select.min.js}"></script>
+    <!-- Custom Script -->
+    <script th:src="@{/static/js/custom.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<![endif]-->
+<!-- Begin Head -->
+
+<head>
+    <title>罗莎蛋糕 - 个人中心</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Start Style -->
+    <link rel="icon" type="image/x-icon" th:href="@{/static/picture/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/fonts.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/icofont.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/nice-select.css}">
+</head>
+
+<body>
+	<div class="loader">
+	  <div class="spinner">
+          <img th:src="@{/static/picture/Bika_loading.gif}" alt="">
+	  </div>
+	</div>
+    <!-- Main Body -->
+    <div class="page-wrapper">
+        <!-- Header Start -->
+        <div th:replace="template.html::title"></div>
+        <!-- Sidebar Start -->
+        <div th:replace="template.html::aside"></div>
+        <!-- Container Start -->
+        <div class="page-wrapper" th:each="profile: ${profile_list}">
+            <div class="main-content">
+                <!-- Page Title Start -->
+                <div class="row">
+                    <div class="col xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-box">
+                                <h4 class="page-title">个人信息</h4>
+                            </div>
+                            <div class="breadcrumb-list">
+                                <ul>
+                                    <li class="breadcrumb-link">
+                                        <a href="javascript:void(0);"><i class="fas fa-home mr-2"></i>Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-link active">User Profile</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Products view Start -->
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card"><grammarly-extension data-grammarly-shadow-root="true" style="position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension>
+                            <div class="card-header">
+                                <h4 class="card-title mb-0" th:text="${user.getName()}+'的资料'">My Profile</h4>
+                                <div class="card-options"><a class="card-options-collapse" href="javascript:;" data-bs-toggle="card-collapse" data-bs-original-title="" title=""><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:;" data-bs-toggle="card-remove" data-bs-original-title="" title=""><i class="fe fe-x"></i></a></div>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="profile-title">
+                                        <div class="media ad-profile2-img" >
+                                            <img alt="" th:src="@{/static/picture/user2.jpg}">
+                                            <div class="media-body">
+                                                <h5 class="mb-1" th:text="${user.getName()}">MARK JECNO</h5>
+
+                                                <p th:text="${user.getRole()}">DESIGNER</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="font-weight:bolder" class="mb-5">
+                                        <div class="mb-4">
+                                            <h5 class="form-label" th:text="'收件人：'+${profile.getRealname()}">收件人：</h5>
+                                        </div>
+                                        <div class="mb-4">
+                                            <h5 class="form-label"th:text="'手机号：'+${profile.getPhone()}">手机号：</h5>
+                                        </div>
+                                        <div class="mb-4">
+                                            <h5 class="form-label" th:text="'收件地址：'+${profile.getAddress()}">收件地址：</h5>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8">
+                        <form class="card profile" method="post" th:action="@{/api/user/updateprofile}">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">编辑信息</h4>
+                                <div class="card-options"><a class="card-options-collapse" href="javascript:;" data-bs-toggle="card-collapse" data-bs-original-title="" title=""><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:;" data-bs-toggle="card-remove" data-bs-original-title="" title=""><i class="fe fe-x"></i></a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">收件人</label>
+                                            <input class="form-control realname" name="realname" type="text" placeholder="仅限中文或英文" data-bs-original-title="" title="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">手机号</label>
+                                            <input class="form-control phone" type="tel" name="phone" placeholder="长度为11位" data-bs-original-title="" title="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">收件地址</label>
+                                            <input class="form-control address" type="text" name="address" placeholder="仅支持中文、英文或数字" data-bs-original-title="" title="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary squer-btn">更新个人信息</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card"><grammarly-extension data-grammarly-shadow-root="true" style="position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension>
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">账户金额</h4>
+                                <div class="card-options"><a class="card-options-collapse" href="javascript:;" data-bs-toggle="card-collapse" data-bs-original-title="" title=""><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:;" data-bs-toggle="card-remove" data-bs-original-title="" title=""><i class="fe fe-x"></i></a></div>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" th:action="@{/api/user/recharge}">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">金额：</label>
+                                            <div class="col-md-10 col-form-label">
+                                                <h5 class="mb-1" th:text="'¥'+${profile.getMoney()}">¥500</h5>
+                                            </div>
+                                        </div>
+                                        <hr class="mt-4 mb-4">
+                                        <div class="page-title-wrapper">
+                                            <div class="page-title-box ad-title-box-use">
+                                                <h4 class="page-title"><b>充值金额</b></h4>
+                                            </div>
+                                            <div class="ad-breadcrumb">
+                                                <ul>
+                                                    <li>
+                                                        <div class="ad-user-btn">
+                                                            <input class="form-control money" name="money" type="text" placeholder="请理性消费" id="text-input">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="add-group">
+                                                            <button class="btn btn-primary squer-btn" >充值</button>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ad-footer-btm">
+                    <p>Copyright © 2022.Company name All rights reserved.<a target="_blank" href="#">ciaociao</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Color Setting -->
+    <!-- Color Setting -->
+
+
+    <!-- Script Start -->
+    <script th:src="@{/static/js/profile.js}"></script>
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script th:src="@{/static/js/popper.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/swiper.min.js}"></script>
+    <!-- Page Specific -->
+    <script th:src="@{/static/js/nice-select.min.js}"></script>
+    <!-- Custom Script -->
+    <script th:src="@{/static/js/custom.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<![endif]-->
+<!-- Begin Head -->
+
+<head>
+    <title>商品详情</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="MobileOptimized" content="320">
+    <!--Start Style -->
+	<link rel="icon" type="image/x-icon" th:href="@{/static/picture/favicon.ico}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/fonts.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/icofont.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+	<link rel="stylesheet"  th:href="@{/static/css/swiper.min.css}">
+	<link rel="stylesheet" id="theme-change" type="text/css" href="">
+</head>
+
+
+<body>
+<div class="loader">
+	<div class="spinner">
+		<img th:src="@{/static/picture/Bika_loading.gif}" alt="">
+	</div>
+</div>
+    <!-- Main Body -->
+<div class="page-wrapper">
+	<!-- Header Start -->
+	<div th:replace="template.html"::title></div>
+	<!-- Sidebar Start -->
+	<div th:replace="template.html"::asid></div>
+        <!-- Container Start -->
+        <div class="page-wrapper">
+            <div class="main-content">
+                <!-- Page Title Start -->
+                <div class="row">
+                    <div class="col xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-box">
+                                <h4 class="page-title"><b>商品详情</b></h4>
+                            </div>
+                            <div class="breadcrumb-list">
+                                <ul>
+                                    <li class="breadcrumb-link">
+                                        <a href="javascript:void(0);"><i class="fas fa-home mr-2"></i>Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-link active">Product Single</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Products view Start -->
+               <!--===Start Index2 Product single Section===-->
+				<div class="int-product-single">
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-12">
+							<div class="int-thumb-slider">
+								<!-- Swiper -->
+								<div class="swiper-container gallery-top">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide"><img th:src="${cakeDetail.getPicture()}" alt="product-img"></div>
+										<div class="swiper-slide"><img th:src="@{/static/picture/bilibili.jpg}" alt="product-img"></div>
+										<div class="swiper-slide"><img th:src="@{/static/picture/bilibili.jpg}" alt="product-img"></div>
+									</div>
+								</div>
+							</div>
+							<div class="int-minithumb-slider">
+								<div class="swiper-container gallery-thumbs">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide"><img th:src="${cakeDetail.getPicture()}" alt="product-img"></div>
+										<div class="swiper-slide"><img th:src="@{/static/picture/bilibili.jpg}" alt="product-img"></div>
+										<div class="swiper-slide"><img th:src="@{/static/picture/bilibili.jpg}" alt="product-img"></div>
+									</div>
+								</div>
+								<!-- Swiper -->
+							</div>
+						</div>
+						<div class="col-lg-8 col-md-8 col-sm-12">
+							<div class="int-thumb-sidebar">
+								<div class="int-price-detail">
+									<h3 th:text="${cakeDetail.getPname()}">商品名</h3>
+								</div>
+								<div class="int-thumb-description">
+									<p th:text="${cakeDetail.getDescription()}">描述description</p>
+								</div>
+								<div class="int-quantity-stock mb-3">
+									<h5 style="color: darkblue" th:text="'库存 : '+${cakeDetail.getNumber()}+'件'">库存 : 5件</h5>
+									<ul>
+										<li><h6>数量:</h6></li>
+										<li>
+											<input type="number" value="1">
+										</li>
+										<li>
+											价格：¥<input type="text" class="quantity" th:value="${cakeDetail.getPrice()}"  readonly>
+										</li>
+									</ul>
+								</div>
+								<div class="int-quantity-stock mb-3">
+									<ul>
+										<li>
+											<a  th:href="@{/api/user/addcart(pid=${cakeDetail.getPid()})}">
+												<button type="button" class="effect-btn btn btn-primary squer-btn">
+													<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">加入购物车</font></font>
+												</button>
+											</a>
+										</li>
+										<li>
+											<a href="product">
+												<button type="button" class="effect-btn btn btn-danger  squer-btn">
+													<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">继续购物</font></font>
+												</button>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ad-footer-btm">
+					<p>Copyright © 2022.Company name All rights reserved.<a target="_blank" href="#">ciaociao</a></p>
+				</div>
+            </div>
+        </div>
+    </div>
+    <!-- Script Start -->
+	<script th:src="@{/static/js/jquery.min.js}"></script>
+	<script th:src="@{/static/js/popper.min.js}"></script>
+	<script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script th:src="@{/static/js/swiper.min.js}"></script>
+    <!-- Page Specific -->
+	<script th:src="@{/static/js/nice-select.min.js}"></script>
+    <!-- Custom Script -->
+	<script th:src="@{/static/js/custom.js}"></script>
+</body>
+
+</html>

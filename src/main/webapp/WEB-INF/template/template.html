@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header class="header-wrapper main-header" th:fragment="title">
+    <div class="header-inner-wrapper">
+        <div class="logo-wrapper">
+            <a href="" class="admin-logo">
+                <img th:src="@{/static/picture/logo.png}" alt="">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="serch-wrapper">
+                <form>
+                    <input type="text" placeholder="输入你想查询的内容...">
+                </form>
+                <a class="search-close" href="javascript:void(0);"><span class="icofont-close-line"></span></a>
+            </div>
+            <div class="header-left">
+                <div class="header-links">
+                    <a href="javascript:void(0);" class="toggle-btn">
+                        <span></span>
+                    </a>
+                </div>
+                <div class="header-links search-link">
+                    <a class="search-toggle" href="javascript:void(0);">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+                                    s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+                                    c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+                                    s-17-7.626-17-17S14.61,6,23.984,6z"></path>
+                                </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="header-controls">
+                <div class="user-info-wrapper header-links" sec:authorize="hasRole('user')">
+                    <a href="javascript:void(0);" class="cart-info">
+                                <span class="header-icon">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve">
+                                        <g>
+                                            <g>
+                                                <path d="M402.351,381.058h-203.32l-11.806-47.224h266.587L512,101.085H129.038L108.882,20.46H0v33.4h82.804l82.208,328.827
+                                                    c-24.053,5.971-41.938,27.737-41.938,53.611c0,30.461,24.781,55.242,55.241,55.242c30.459,0,55.241-24.781,55.241-55.242
+                                                    c0-7.755-1.613-15.138-4.511-21.841h122.577c-2.897,6.703-4.511,14.086-4.511,21.841c0,30.461,24.781,55.242,55.241,55.242
+                                                    c30.459,0,55.241-24.781,55.241-55.242C457.592,405.84,432.811,381.058,402.351,381.058z M287.029,300.434h-37.08l-8.284-66.275
+                                                    h45.365V300.434z M411.912,134.484h57.31l-16.568,66.275h-49.026L411.912,134.484z M399.453,234.16h44.85l-16.568,66.275h-36.566
+                                                    L399.453,234.16z M320.428,134.484h57.824l-8.284,66.275h-49.539V134.484z M320.428,234.159h45.365l-8.284,66.275h-37.08V234.159z
+                                                     M287.029,134.484v66.275h-49.539l-8.284-66.275H287.029z M137.388,134.484h58.158l8.284,66.275h-49.873L137.388,134.484z
+                                                     M162.307,234.159h45.699l8.284,66.275h-37.414L162.307,234.159z M178.315,458.141c-12.043,0-21.841-9.798-21.841-21.842
+                                                    c0-12.043,9.798-21.841,21.841-21.841s21.841,9.798,21.841,21.841C200.156,448.343,190.358,458.141,178.315,458.141z
+                                                     M402.351,458.141c-12.043,0-21.841-9.798-21.841-21.842c0-12.043,9.798-21.841,21.841-21.841
+                                                    c12.043,0,21.841,9.798,21.841,21.841C424.192,448.343,414.394,458.141,402.351,458.141z"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </span>
+                        <span class="item-count" th:text="${number}">0</span>
+                    </a>
+                    <div class="user-info-box">
+                        <div class="drop-down-header">
+                            <h4>购物车</h4>
+                            <p th:text="'您已选中'+${number}+'件商品'">您已选中3件商品</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <a th:href="@{/page/user/cart}">
+                                    <i class="fas fa-shopping-cart"></i> 购物车
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/page/user/index}">
+                                    <i class="fas fa-money-check"></i> 订单
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="user-info-wrapper header-links">
+                    <a href="javascript:void(0);" class="user-info">
+                        <img th:src="@{/static/picture/user.jpg}" alt="" class="user-img" sec:authorize="hasRole('admin')">
+                        <img th:src="@{/static/picture/user2.jpg}" alt="" class="user-img" sec:authorize="hasRole('user')">
+                        <div class="blink-animation">
+                            <span class="blink-circle"></span>
+                            <span class="main-circle"></span>
+                        </div>
+                    </a>
+                    <div class="user-info-box">
+                        <div class="drop-down-header">
+                            <h4 th:text="${user.getName()}">John Brown</h4>
+                            <p th:text="${user.getRole().equals('user') ? '普通会员' : '管理员'}">UI | UX Designer</p>
+                        </div>
+                        <ul>
+                            <li sec:authorize="hasRole('user')">
+                                <a th:href="@{/page/user/profile}">
+                                    <i class="far fa-edit"></i> 编辑信息
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/api/auth/logout}">
+                                    <i class="fas fa-sign-out-alt"></i> 退出登录
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<aside class="sidebar-wrapper" th:fragment="aside">
+    <div class="side-menu-wrap">
+        <ul class="main-menu">
+            <li sec:authorize="hasRole('admin')">
+                <a th:href="@{/page/admin/index}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </span>
+                    <span class="menu-text">
+                                用户订单
+                            </span>
+                </a>
+            </li>
+            <li class="has-sub-menu" sec:authorize="hasRole('admin')">
+                <a th:href="@{/page/admin/book}" >
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            </span>
+                    <span class="menu-text">
+                                商品管理
+                            </span>
+                </a>
+                <ul class="sub-menu" style="display: none;">
+                    <li>
+                        <a th:href="@{/page/admin/cake}">
+                                    <span class="icon-dash">
+                                    </span>
+                            <span class="menu-text">
+                                        商品信息
+                                    </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/page/admin/add-cake}">
+                                    <span class="icon-dash">
+                                    </span>
+                            <span class="menu-text">
+                                        录入商品
+                                    </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li sec:authorize="hasRole('admin')">
+                <a th:href="@{/page/admin/users}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </span>
+                    <span class="menu-text">
+                                用户列表
+                            </span>
+                </a>
+            </li>
+            <li sec:authorize="hasRole('user')">
+                <a th:href="@{/page/user/product}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </span>
+                    <span class="menu-text">
+                                商品列表
+                            </span>
+                </a>
+            </li>
+            <li sec:authorize="hasRole('user')">
+                <a th:href="@{/page/user/index}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            </span>
+                    <span class="menu-text">
+                                订单管理
+                            </span>
+                </a>
+            </li>
+            <li sec:authorize="hasRole('user')">
+                <a th:href="@{/page/user/profile}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </span>
+                    <span class="menu-text">
+                                个人中心
+                            </span>
+                </a>
+            </li>
+            <li sec:authorize="hasRole('user')">
+                <a th:href="@{/page/user/cart}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </span>
+                    <span class="menu-text">
+                                购物车
+                            </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+</body>
+</html>

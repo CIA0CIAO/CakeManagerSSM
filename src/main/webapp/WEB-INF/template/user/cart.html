@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<![endif]-->
+<!-- Begin Head -->
+
+<head>
+    <title>罗莎蛋糕 - 购物车</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="MobileOptimized" content="320">
+    <!--Start Style -->
+    <link rel="icon" type="image/x-icon" th:href="@{/static/picture/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/fonts.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/icofont.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+    <link rel="stylesheet" th:href="@{/static/css/swiper.min.css}">
+	<link rel="stylesheet" id="theme-change" type="text/css" href="">
+</head>
+
+<body>
+	<div class="loader">
+	  <div class="spinner">
+		<img th:src="@{/static/picture/Bika_loading.gif}" alt="">
+	  </div> 
+	</div>
+    <!-- Main Body -->
+    <div class="page-wrapper">
+        <!-- Header Start -->
+        <div th:replace="template.html"::title></div>
+        <!-- Sidebar Start -->
+        <div th:replace="template.html"::asid></div>
+        <!-- Container Start -->
+        <div class="page-wrapper">
+            <div class="main-content">
+                <!-- Page Title Start -->
+                <div class="row">
+                    <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-box">
+                                <h4 class="page-title bold">购物车</h4>
+                            </div>
+                            <div class="breadcrumb-list">
+                                <ul>
+                                    <li class="breadcrumb-link">
+                                        <a href="javascript:void(0);"><i class="fas fa-home mr-2"></i>Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-link active">Cart</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Table Start -->
+                    <div class="row">
+                        <!-- Styled Table Card-->
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card table-card">
+                                <div class="card-header pb-0">
+                                    <h6>如果喜欢, 请带走我吧, Master❤</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-holder">
+                                        <div class="table-responsive">
+                                            <table class="table table-styled mb-0">
+                                                <thead class="thead-light">
+                                                <tr>
+                                                    <th>商品名称</th>
+                                                    <th>商品编号</th>
+                                                    <th>单价</th>
+                                                    <th>数量</th>
+                                                    <th>删除</th>
+                                                    <th>总价</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="cart : ${cartlistbyuid}">
+                                                    <td th:text="${cart.getPname()}">Dining Chair</td>
+                                                    <td th:text="'#00'+${cart.getPid()}">#1</td>
+                                                    <td th:text="'¥'+${cart.getPrice()}">$86</td>
+                                                    <td th:text="${cart.getCount()}"></td>
+                                                    <td class="relative">
+                                                        <a th:href="@{/api/user/deletecart(pid=${cart.getPid()})}">
+                                                            <i class="far fa-times-circle"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td th:text="'¥'+${cart.getAllprice()}">$375</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="ad-breadcrumb ad-breadcrumb2 dd-flex">
+                                                            <div class="form-group">
+                                                                <div class="ad-user-btn">
+                                                                    <input class="form-control" type="text" placeholder="请输入优惠码，若无请忽略。">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group ad-apply-cart">
+                                                                <a class="ad-btn">确定</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td><b>共需要支付 :</b></td>
+                                                    <td th:text="'¥'+${total}">$6935.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td><a href="cake" class="btn btn-danger squer-btn mt-2 mr-2">继续购物</a></td>
+                                                    <td><button type="button" class="btn btn-success  squer-btn mt-2 mr-2" data-toggle="modal" data-target="#model-grid">结账</button></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Model 4 -->
+                    <form method="post" th:action="@{/api/user/payment}">
+                        <div class="modal fade" id="model-grid" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle5">订单确认中...</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-8 ml-auto">
+                                                    <label class="col-md-14 ">您需要支付的金额：</label>
+                                                </div>
+                                                <div class="col-md-4 ml-auto">
+                                                    <label class="col-md-2" th:text="'¥'+${total}">	¥62.5</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8 ml-auto">
+                                                    <label class="col-md-14 ">您所购买的商品数量：</label>
+                                                </div>
+                                                <div class="col-md-4 ml-auto">
+                                                    <label class="col-md-10" th:text="${number}+'件'">	¥62.5</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                        <button type="submit" class="btn btn-primary">确认支付</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ad-footer-btm">
+                    <p>Copyright © 2022.Company name All rights reserved.<a target="_blank" href="#">ciaociao</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Color Setting -->
+    <!-- Color Setting -->
+	
+	
+    <!-- Script Start -->
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script th:src="@{/static/js/popper.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/swiper.min.js}"></script>
+    <!-- Page Specific -->
+    <script th:src="@{/static/js/nice-select.min.js}"></script>
+    <!-- Custom Script -->
+    <script th:src="@{/static/js/custom.js}"></script>
+</body>
+
+</html>
