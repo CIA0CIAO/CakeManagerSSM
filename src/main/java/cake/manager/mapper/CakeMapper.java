@@ -43,6 +43,7 @@ public interface CakeMapper {
     void deleteCakebypid(@Param("pid")int pid);
     @Insert("insert into cake(pname, price, number) value(#{pname},#{price},#{number})")
     void addCake(@Param("pname")String pname,@Param("price")double price,@Param("number")int number);
-
+    @Update("update cake set pname=#{pname},price=#{price},description=#{description},number=#{number} where pid=#{pid}")
+    int updatedetail(@Param("pid")int pid,@Param("pname")String pname,@Param("price")double price,@Param("description")String description,@Param("number")int number);
 
 }

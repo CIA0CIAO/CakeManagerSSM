@@ -52,10 +52,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().hasAnyRole("user", "admin")
                 .and()
                 .formLogin()       //配置Form表单登陆
-                .loginPage("/page/auth/login")       //登陆页面地址（GET）   b
-                .loginProcessingUrl("/api/auth/login")    //form表单提交地址（POST）
+                .loginPage("/page/auth/login")       //替换掉springsecurity提供的登陆页面地址（GET）
+                .loginProcessingUrl("/api/auth/login")    //form表单提交地址（POST），由springsecurity处理登录请求
 //                .defaultSuccessUrl("/index",true)    //登陆成功后跳转的页面，也可以通过Handler实现高度自定义
                 .successHandler(this::onAuthenticationSuccess)
+                //使用lambda表达式将方法引用作为参数传递给successHandler方法。方法引用this::onAuthenticationSuccess相当于写一个lambda表达式，调用当前对象的onAuthenticationSuccess方法。
                 .and()
                 .logout()
                 .logoutUrl("/api/auth/logout")    //退出登陆的请求地址

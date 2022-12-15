@@ -6,6 +6,7 @@ import cake.manager.entity.Order;
 import cake.manager.mapper.CakeMapper;
 import cake.manager.service.CakeService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -70,6 +71,12 @@ public class CakeServiceImpl implements CakeService {
     @Override
     public void addCake(String pname, double price, int number) {
         mapper.addCake(pname,price,number);
+    }
+    @Transactional
+    @Override
+    public void updatedetail(int pid, String pname, double price, String description, int number) {
+        if(mapper.updatedetail(pid,pname,price,description,number)<=0)
+            throw new RuntimeException("商品详细信息更改失败！");
     }
 
 }

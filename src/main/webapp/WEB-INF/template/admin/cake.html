@@ -8,7 +8,7 @@
 <!-- Begin Head -->
 
 <head>
-    <title>图书管理系统 - 图书管理</title>
+    <title>商品管理</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="">
@@ -19,6 +19,7 @@
     <!--Start Style -->
     <link rel="icon" type="image/x-icon" th:href="@{/static/picture/favicon.ico}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/fonts.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/back-to-top.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/icofont.min.css}">
@@ -38,6 +39,7 @@
         <div th:replace="template.html::aside"></div>
         <!-- Container Start -->
         <div class="page-wrapper">
+            <div class="back-to-top"></div>
             <div class="main-content">
                 <!-- Page Title Start -->
                 <div class="row">
@@ -75,16 +77,68 @@
                                                 <th>商品编号</th>
                                                 <th>商品名称</th>
                                                 <th>价格</th>
+                                                <th style="width:250px">商品描述</th>
                                                 <th>库存数量</th>
+                                                <th>编辑商品</th>
                                                 <th>是否下架</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="cake : ${cakeList}">
-                                                <td th:text="'#'+${cake.getPid()}">1</td>
-                                                <td th:text="${cake.getPname()}">书籍名称</td>
-                                                <td th:text="'¥'+${cake.getPrice()}">书籍简介</td>
-                                                <td th:text="${cake.getNumber()}">价格</td>
+                                            <tr th:each="cake,iterStat: ${cakeList}">
+                                                <td th:text="'#'+${cake.getPid()}">商品编号</td>
+                                                <td th:text="${cake.getPname()}">商品名称</td>
+                                                <td th:text="'¥'+${cake.getPrice()}">价格</td>
+                                                <td th:text="${cake.getDescription()}">商品描述</td>
+                                                <td th:text="${cake.getNumber()}">库存数量</td>
+                                                <td class="relative">
+                                                    <a >
+                                                        <button type="button" class="effect-btn btn btn-danger squer-btn sm-btn" data-toggle="modal"  th:data-target="'#modal-' + ${iterStat.index}" data-backdrop="static">
+                                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>
+                                                        </button>
+                                                    </a>
+                                                    <form method="post" th:action="@{/api/admin/updatedetail}">
+                                                        <div class="modal fade " th:id="'modal-' + ${iterStat.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalCenterTitle5">修改商品详细信息</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid" >
+                                                                            <div class="row mb-3">
+                                                                                <label class="col-md-3 "><b>商品编号：</b></label>
+                                                                                <input type="text" name="pid" class="form-control col-md-9" th:value="${cake.getPid()}" readonly>
+                                                                            </div>
+                                                                            <div class="row mb-3">
+                                                                                <label class="col-md-3 "><b>商品名称：</b></label>
+                                                                                <input type="text" name="pname" class="form-control col-md-9" th:value="${cake.getPname()}">
+                                                                            </div>
+                                                                            <div class="row mb-3">
+                                                                                <label class="col-md-3 "><b>价格：</b></label>
+                                                                                <input type="text" name="price" class="form-control col-md-9" th:value="${cake.getPrice()}">
+                                                                            </div>
+                                                                            <div class="row mb-3">
+                                                                                <label class="col-md-3 "><b>商品描述：</b></label>
+                                                                                <textarea type="text" name="description" class="form-control col-md-9" th:text="${cake.getDescription()}"></textarea>
+                                                                            </div>
+                                                                            <div class="row mb-3">
+                                                                                <label class="col-md-3 "><b>库存数量：</b></label>
+                                                                                <input type="text" name="number" class="form-control col-md-9" th:value="${cake.getNumber()}">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                                        <button type="submit" class="btn btn-primary">确认修改</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </td>
                                                 <td class="relative">
                                                     <a  th:href="@{/api/admin/deletecake(pid=${cake.getPid()})}">
                                                         <button type="button" class="effect-btn btn btn-success squer-btn sm-btn">
@@ -100,12 +154,14 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Script Start -->
+    <script th:src="@{/static/js/back-to-top.js}"></script>
     <script th:src="@{/static/js/jquery.min.js}"></script>
     <script th:src="@{/static/js/popper.min.js}"></script>
     <script th:src="@{/static/js/bootstrap.min.js}"></script>

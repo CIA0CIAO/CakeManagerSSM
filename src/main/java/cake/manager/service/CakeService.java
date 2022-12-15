@@ -18,5 +18,6 @@ public interface CakeService {
     GlobalStat getGlobalStat();
     void deleteCake(int pid);
     void addCake(String pname,double price,int number);
+    void updatedetail(int pid,String pname,double price,String description,int number);
 
 }

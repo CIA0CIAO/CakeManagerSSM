@@ -37,6 +37,7 @@ public class RootConfiguration {
         return bean;
     }
     @Bean
+    //创建一个事务管理器，在业务层service使用@Transactional
     public TransactionManager transactionManager(@Autowired DataSource dataSource){
         return new DataSourceTransactionManager(dataSource);
     }

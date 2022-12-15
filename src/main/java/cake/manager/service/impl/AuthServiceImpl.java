@@ -18,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Resource
     UserMapper mapper;
-    @Transactional//可以帮助我们把事务开启、提交或者回滚的操作
+    @Transactional//表示此方法执行的是一个事务操作，在调用此方法时，Spring会通过AOP机制为其进行增强，一旦发现异常，事务会自动回滚。
     @Override
     public void register(String username, String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

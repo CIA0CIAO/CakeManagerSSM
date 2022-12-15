@@ -36,4 +36,13 @@ public class AdminApiController {
         cakeService.deleteCake(pid);
         return "redirect:/page/admin/cake";
     }
+    @RequestMapping(value = "/updatedetail", method = RequestMethod.POST)
+    public String updatedetail(@RequestParam("pid") int pid,
+                               @RequestParam("pname") String pname,
+                          @RequestParam("price") double price,
+                               @RequestParam("description") String description,
+                          @RequestParam("number") int number){
+        cakeService.updatedetail(pid,pname,price,description,number);
+        return "redirect:/page/admin/cake";
+    }
 }

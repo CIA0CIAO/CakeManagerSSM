@@ -99,10 +99,19 @@
 									<ul>
 										<li><h6>数量:</h6></li>
 										<li>
-											<input type="number" value="1">
+											<div class="int-table-quantity">
+												<div class="quantity-wrapper">
+													<div class="input-group">
+														<span class="quantity-minus"> - </span>
+														<input type="number" class="quantity" th:value="1">
+														<span class="quantity-plus"> + </span>
+													</div>
+												</div>
+											</div>
 										</li>
+										<li><label ><h6>价格：¥</h6></label></li>
 										<li>
-											价格：¥<input type="text" class="quantity" th:value="${cakeDetail.getPrice()}"  readonly>
+											<input type="text" class="form-control col-md-9" th:value="${cakeDetail.getPrice()}" readonly>
 										</li>
 									</ul>
 								</div>

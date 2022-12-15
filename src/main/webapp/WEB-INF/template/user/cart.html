@@ -84,10 +84,24 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr th:each="cart : ${cartlistbyuid}">
-                                                    <td th:text="${cart.getPname()}">Dining Chair</td>
+                                                    <td>
+                                                        <a th:href="@{/page/user/details(pid=${cart.getPid()})}">
+                                                            <p th:text="${cart.getPname()}"></p>
+                                                        </a>
+                                                    </td>
                                                     <td th:text="'#00'+${cart.getPid()}">#1</td>
                                                     <td th:text="'¥'+${cart.getPrice()}">$86</td>
-                                                    <td th:text="${cart.getCount()}"></td>
+                                                    <td>
+                                                        <div class="int-table-quantity">
+                                                            <div class="quantity-wrapper">
+                                                                <div class="input-group">
+                                                                    <span class="quantity-minus"> - </span>
+                                                                    <input type="number" class="quantity" th:value="${cart.getCount()}">
+                                                                    <span class="quantity-plus"> + </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <td class="relative">
                                                         <a th:href="@{/api/user/deletecart(pid=${cart.getPid()})}">
                                                             <i class="far fa-times-circle"></i>
