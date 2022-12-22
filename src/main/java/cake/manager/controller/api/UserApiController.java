@@ -36,7 +36,7 @@ public class UserApiController {
 
     @RequestMapping(value = "/addcart", method = RequestMethod.GET)
     public String addcart(@RequestParam("pid") int pid,
-                                @SessionAttribute("user") AuthUser user){
+                          @SessionAttribute("user") AuthUser user){
         cakeService.addcakecart(pid,user.getId());
         return "redirect:/page/user/product";
     }
