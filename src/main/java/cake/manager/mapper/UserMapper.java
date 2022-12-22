@@ -9,6 +9,8 @@ import java.util.List;
 public interface UserMapper {
     @Select("select * from users where name = #{name}")
     AuthUser getPasswordByUsername(String name);
+    @Select("select `name` from users where `name`=#{name}")
+    String isRegister(@Param("name") String name);
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     @Insert("insert into users(name, role, password) values(#{name}, #{role}, #{password})")
     int registerUser(AuthUser user);

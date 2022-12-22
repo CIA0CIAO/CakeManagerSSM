@@ -45,12 +45,17 @@ public class UserPageController {
         model.addAttribute("total",service.showTotal(user.getId()));
         return "/user/cart";
     }
-    @RequestMapping("/product")
-    public String product(HttpSession session, Model model){
+    @RequestMapping(value ="/product", method = RequestMethod.GET)
+    public String product(HttpSession session,@RequestParam(defaultValue = "1")Integer pageNumber, Model model){
         AuthUser user = service.findUser(session);
+        int cakeCount =cakeService.getCakeCount();// 获取总记录条数
+        int pageCount = (cakeCount + 8 - 1) / 8;// 总页数
+        // 将当前页码 和 总页数 设置到作用域
+        session.setAttribute("pageNumber", pageNumber);
+        session.setAttribute("pageCount", pageCount);
         model.addAttribute("user", service.findUser(session));
         model.addAttribute("number",service.showproductnumber(user.getId()));
-        model.addAttribute("product_list",cakeService.getAllCake());
+        model.addAttribute("product_list",cakeService.getAllCake((pageNumber - 1) * 8));
         return "/user/product";
     }
     @RequestMapping(value = "/details", method = RequestMethod.GET)
@@ -61,6 +66,15 @@ public class UserPageController {
         model.addAttribute("user", service.findUser(session));
         model.addAttribute("number",service.showproductnumber(user.getId()));
         return "/user/details";
+    }
+    @RequestMapping( "/find")
+    public String find(HttpSession session, Model model){
+        AuthUser user = service.findUser(session);
+        session.getAttribute("findPname");
+        session.getAttribute("cakehbyPname");
+        model.addAttribute("user", service.findUser(session));
+        model.addAttribute("number",service.showproductnumber(user.getId()));
+        return "/user/find";
     }
 }
 

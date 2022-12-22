@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface AuthService {
     void register(String username,String password);
+    Boolean isRegister(String username);
     AuthUser findUser(HttpSession session);
     void updateProfile(String realname,String phone,String address,int id);
     void recharge(double recharge,int id);

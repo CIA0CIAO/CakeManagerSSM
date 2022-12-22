@@ -43,67 +43,12 @@
         <div class="page-wrapper">
 			<div class="back-to-top"></div>
             <div class="main-content">
-                <!-- Banner Start -->
-				<div class="row">
-					<div class="col-md-3">
-						<div class="jumbotron" id="jumbotron1">
-							<h2 style="color: white">
-								<b>
-									<p class="mb-3">每日精选</p>
-									<p class="mb-3">甄选好物</p>
-									<p class="mb-3">初音未来</p>
-								</b>
-							</h2>
-							<p><a class="btn btn-primary btn-lg" href="#" role="button">了解更多</a></p>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-							<ol class="carousel-indicators">
-								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-								<li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
-								<li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
-							</ol>
-							<div class="carousel-inner">
-								<div class="carousel-item active">
-									<img class="d-block w-100" th:src="@{/static/picture/001.png}" alt="First slide">
-								</div>
-								<div class="carousel-item">
-									<img class="d-block w-100" th:src="@{/static/picture/002.jpg}" alt="Second slide">
-								</div>
-								<div class="carousel-item">
-									<img class="d-block w-100" th:src="@{/static/picture/003.png}" alt="Third slide">
-								</div>
-							</div>
-							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="sr-only">Previous</span>
-							</a>
-							<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="sr-only">Next</span>
-							</a>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="jumbotron" id="jumbotron2">
-							<h2 style="color: white">
-								<b>
-									<p class="mb-3">每日精选</p>
-									<p class="mb-3">甄选好物</p>
-									<p class="mb-3">初音未来</p>
-								</b>
-							</h2>
-							<p><a class="btn btn-primary btn-lg" href="#" role="button">了解更多</a></p>
-						</div>
-					</div>
-				</div>
 				<!-- Page Title Start -->
 				<div class="row">
 					<div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 						<div class="page-title-wrapper">
 							<div class="page-title-box ad-title-box-use">
-								<h4 class="page-title"><b>商品列表</b></h4>
+								<h3 class="page-title"><b th:text="'搜索“'+${session.findPname}+'”的结果'">商品列表</b></h3>
 							</div>
 							<div class="ad-breadcrumb">
 								<form method="post" th:action="@{/api/user/findbypname}">
@@ -129,13 +74,14 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
                 <!-- Table Start -->
                 <div class="row ad-btm-space">
 					<div class="col-xl-12 col-lg-12 col-md-8 col-sm-12">
 						<div class="main-product-grid">
 							<ul >
-								<li th:each="product:${product_list}">
+								<li th:each="product:${session.cakebyPname}">
 									<div class="product-grid">
 										<div class="product-item">
 											<img th:src="'/cakemanager/static/picture/'+${product.getPicture()}">
@@ -169,36 +115,6 @@
 									</div>
 								</li>
 							</ul>
-						</div>
-						<!--分页-->
-						<div class="card-footer pt-0">
-							<nav class="d-inline-block">
-								<ul class="pagination mb-0 ">
-									<li class="page-item " th:unless="${session.pageNumber == 1}">
-										<a  th:href="@{/page/user/product(pageNumber=${1})} ">
-											<button type="button" class="btn-outline primary-outline squer-btn  sm-btn mt-0  mr-2" >首页</button>
-										</a>
-									</li>
-								  	<li class="page-item " th:unless="${session.pageNumber == 1}">
-										<a class="page-link" th:href="@{/page/user/product(pageNumber=${session.pageNumber - 1})}" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-								  	</li>
-									<li class="page-item active">
-										<a class="page-link " th:text="${session.pageNumber}" th:href="@{/page/user/product(pageNumber=${session.pageNumber})}"></a>
-									</li>
-									<li class="page-item" th:unless="${session.pageNumber == session.pageCount }">
-										<a class="page-link " th:text="${session.pageNumber + 1}" th:href="@{/page/user/product(pageNumber=${session.pageNumber + 1})}"></a>
-									</li>
-								  	<li class="page-item " th:unless="${session.pageNumber == session.pageCount }">
-										<a class="page-link " th:href="@{/page/user/product(pageNumber=${session.pageNumber + 1})}"><i class="fas fa-chevron-right "></i></a>
-								  	</li>
-									<li class="page-item " th:unless="${session.pageNumber == session.pageCount}">
-										<a  th:href="@{/page/user/product(pageNumber=${session.pageCount})} ">
-											<button type="button" class="btn-outline primary-outline squer-btn  sm-btn mt-0  mr-2" >尾页</button>
-										</a>
-									</li>
-									<button type="button" class="btn btn-light squer-btn sm-btn mt-0 mr-2" th:text="'共有'+${session.pageCount}+'页'">Light</button>
-								</ul>
-							</nav>
 						</div>
                 </div>
 				<div class="ad-footer-btm">

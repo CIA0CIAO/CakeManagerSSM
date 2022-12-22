@@ -3,7 +3,7 @@ window.onload = function () {
     // 获取表单
     let registerForm = document.querySelector(".register-form");
     // 获取form中的输入表单
-    let userNameInput = document.querySelector(".userName");
+    let userNameInput = document.querySelector(".username");
     let passwordInput = document.querySelector(".password");
     let passwordInput2 = document.querySelector(".password2");
     // 获取表单输入的值
@@ -19,16 +19,16 @@ window.onload = function () {
 
     // 表单失去焦点验证
     userNameInput.onblur = function () {
-        userName = document.querySelector(".userName").value;
+        userName = document.querySelector(".username").value;
         if (!isEmpty(userName)) {
             // 去除昵称中的空格
             if (/\s/.test(userName)) {
                 userName = userName.replace(/\s/g, '');
                 userNameInput.value = userName;
             }
-            if (!(userName.length >= 1 && userName.length <= 10)) {
+            if (!(userName.length >= 2 && userName.length <= 10)) {
                 userNameFlag = false;
-                alert("昵称长度不合法,长度只能在：【1 ~ 10】之间");
+                alert("昵称长度不合法,长度只能在：【2 ~ 10】之间");
             }else {
                 userNameFlag = true;
             }

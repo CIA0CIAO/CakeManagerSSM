@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/api/user")
@@ -60,5 +61,15 @@ public class UserApiController {
         cakeService.deletecartByuid(user.getId());//再删除购物车内商品
         authService.createOrder(user.getId(),number, payment);
         return "redirect:/page/user/index";
+    }
+    @RequestMapping(value = "/findbypname", method = RequestMethod.POST)
+    public String findbypname(@RequestParam("pname") String pname,
+                              @SessionAttribute("user") AuthUser user,
+                              HttpSession session){
+        if(pname != null){
+            session.setAttribute("findPname",pname);
+            session.setAttribute("cakebyPname",cakeService.selectCakebyPname(pname));
+        }
+        return "redirect:/page/user/find";
     }
 }

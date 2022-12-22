@@ -7,10 +7,12 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 @Mapper
 public interface CakeMapper {
-    @Select("select * from cake")
-    List<Cake> allCake();
+    @Select("select * from cake limit #{pageNumber},8")
+    List<Cake> allCake(@Param("pageNumber")Integer pageNumber);
     @Select("select * from cake where pid = #{pid}")
     Cake cakeDetail(@Param("pid")int pid);
+    @Select("select * from cake where pname LIKE concat('%',#{pname},'%')")
+    List<Cake> findCakebyPname(@Param("pname")String pname);
     @Insert("insert into cart(pid, uid) values(#{pid}, #{uid})")
     void addCart(@Param("pid") int pid, @Param("uid") int uid);
     @Delete("delete from cart where pid = #{pid} and uid = #{uid}")

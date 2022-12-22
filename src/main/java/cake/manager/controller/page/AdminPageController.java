@@ -5,6 +5,8 @@ import cake.manager.service.CakeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -30,10 +32,15 @@ public class AdminPageController {
         model.addAttribute("user_list",authService.showAlluser());
         return "/admin/users";
     }
-    @RequestMapping("/cake")
-    public String cake(HttpSession session, Model model){
+    @RequestMapping(value = "/cake", method = RequestMethod.GET)
+    public String cake(HttpSession session, @RequestParam(defaultValue = "1")Integer pageNumber, Model model){
+        int cakeCount =cakeService.getCakeCount();// 获取总记录条数
+        int pageCount = (cakeCount + 8 - 1) / 8;// 总页数
+        // 将当前页码 和 总页数 设置到作用域
+        session.setAttribute("pageNumber", pageNumber);
+        session.setAttribute("pageCount", pageCount);
         model.addAttribute("user", authService.findUser(session));
-        model.addAttribute("cakeList",cakeService.getAllCake());
+        model.addAttribute("cakeList",cakeService.getAllCake((pageNumber - 1) * 8));
         return "/admin/cake";
     }
     @RequestMapping("/add-cake")

@@ -10,22 +10,30 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.stream.Collectors;
 @Service
 public class CakeServiceImpl implements CakeService {
     @Resource
     CakeMapper mapper;
     @Override
-    public List<Cake> getAllCake() {
-        List<Cake> cakes = mapper.allCake();
-        return cakes
-                .stream()
-                .collect(Collectors.toList());
+    public List<Cake> getAllCake(Integer pageNumber) {
+        return mapper.allCake(pageNumber);
     }
+
+    @Override
+    public int getCakeCount() {
+        return mapper.getCakeCount();
+    }
+
     @Override
     public Cake getCakeDetail(int pid) {
         return mapper.cakeDetail(pid);
     }
+
+    @Override
+    public List<Cake> selectCakebyPname(String pname) {
+        return mapper.findCakebyPname(pname);
+    }
+
     @Override
     public void addcakecart(int pid, int uid) {
         mapper.addCart(pid,uid);

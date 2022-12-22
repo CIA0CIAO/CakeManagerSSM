@@ -15,7 +15,6 @@ import java.util.List;
 
 @Service
 public class AuthServiceImpl implements AuthService {
-
     @Resource
     UserMapper mapper;
     @Transactional//表示此方法执行的是一个事务操作，在调用此方法时，Spring会通过AOP机制为其进行增强，一旦发现异常，事务会自动回滚。
@@ -28,6 +27,15 @@ public class AuthServiceImpl implements AuthService {
         if (mapper.addProfile(user.getId(),"","",0,"") <= 0)
             throw new RuntimeException("用户详细信息插入失败！");
     }
+
+    @Override
+    public Boolean isRegister(String username) {
+        String flag = mapper.isRegister(username);
+        if(flag != null)
+            return true;
+        return false;
+    }
+
     @Override
     public AuthUser findUser(HttpSession session) {
         AuthUser user = (AuthUser) session.getAttribute("user");
