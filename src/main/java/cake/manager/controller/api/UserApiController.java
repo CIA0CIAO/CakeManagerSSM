@@ -1,6 +1,7 @@
 package cake.manager.controller.api;
 
 import cake.manager.entity.AuthUser;
+import cake.manager.entity.Cake;
 import cake.manager.service.AuthService;
 import cake.manager.service.CakeService;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,10 @@ public class UserApiController {
     @RequestMapping(value = "/addcart", method = RequestMethod.GET)
     public String addcart(@RequestParam("pid") int pid,
                           @SessionAttribute("user") AuthUser user){
-        cakeService.addcakecart(pid,user.getId());
+        Cake cake = cakeService.getCakeDetail(pid);
+        if(cake.getNumber() > 0) {
+            cakeService.addcakecart(pid,user.getId());
+        }
         return "redirect:/page/user/product";
     }
     @RequestMapping(value = "/deletecart", method = RequestMethod.GET)

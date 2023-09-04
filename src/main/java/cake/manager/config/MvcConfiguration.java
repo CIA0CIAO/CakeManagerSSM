@@ -51,7 +51,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
     //开启静态资源处理
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
+        configurer.enable(); //开启默认的Servlet
     }
 
     //静态资源路径配置

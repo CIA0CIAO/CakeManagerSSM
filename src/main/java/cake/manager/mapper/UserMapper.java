@@ -34,7 +34,7 @@ public interface UserMapper {
             @Result(column = "allprice", property = "allprice")
     })
     @Select("SELECT cart.pid as pid,pname,price,count(cart.pid) as count,price*count(cart.pid) as allprice FROM cake,users,cart " +
-            "WHERE cake.pid = cart.pid AND cart.uid = users.uid AND users.uid = #{uid} Group by pname")
+            "WHERE cake.pid = cart.pid AND cart.uid = users.uid AND users.uid = #{uid} Group by pid")
     List<Cart> getCartbyUid(@Param("uid")int uid);//获取uid对应的购物车
     @Select("SELECT SUM(price) FROM cake,users,cart WHERE cake.pid = cart.pid AND cart.uid = users.uid " +
             "Group by users.uid HAVING users.uid = #{uid}")
